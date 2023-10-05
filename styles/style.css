@@ -1,0 +1,20 @@
+body {
+    background-color: #f5e9e7;
+}
+
+.icon {
+    height:40px;
+    width:40px; 
+}
+
+.bg-light {
+    background-color: rgb(223, 207, 207) !important;
+    background-image: var(--bs-gradient) !important ;
+}
+
+
+.display {
+    width:800px;
+    height:600px;
+    background-color: blue;
+}
