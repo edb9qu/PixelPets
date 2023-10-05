@@ -44,18 +44,32 @@
                 <header class="h1">Create a new Account</header>
                 <header class="h2"></header>
                 <div class="form-floating mb-3">
+                    <input type="username" class="form-control" id="floatingInput" placeholder="admin">
+                    <label for="floatingInput">Create a Username</label>
+                  </div>
+                <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
                     <label for="floatingInput">Email address</label>
                   </div>
-                  <div class="form-floating">
+                  <div class="form-floating mb-3">
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
+                    <label for="floatingPassword">Your Password</label>
                   </div>
-                  <div class="form-floating">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Repeat Password">
-                    <label for="floatingPassword">Password</label>
+                  <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Retype Password</label>
                   </div>
-                </footer>
+                <div class="form-floating mb-3">
+                  <select class="form-select" aria-label="Default select example">
+                    <option selected>Select</option>
+                    <option value="1">I am over the age of 13</option>
+                    <option value="2">I have an adult's permission to join PixelPet</option>
+                    <option value="3">I am under 13 and do not have adult permission</option>
+                  </select>
+                  </div>
+
+                <i>Already have an account?</i>
+                <a href="login.html" class="btn btn-primary">LOG IN</a>
               </div>
         </footer>
     </body>
