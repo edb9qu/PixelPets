@@ -1,5 +1,16 @@
+
+/* color pallet
+(236,132,62) - orange
+(231,198,93) - yellow orange
+(231,220,140) - yellow
+(132,206,185) - green tealish
+(102,129,165) - blue/idigo
+
+
+
+*/
 body {
-    background-color: #f5e9e7;
+    background-color: rgb(162,236,215);
 }
 
 .icon {
@@ -8,12 +19,12 @@ body {
 }
 
 .bg-light {
-    background-color: rgb(223, 207, 207) !important;
+    background-color: rgb(93, 154, 197) !important;
     background-image: var(--bs-gradient) !important ;
 }
 
 
-.display {
+.disgplay {
     width:800px;
     height:600px;
     background-color: blue;
