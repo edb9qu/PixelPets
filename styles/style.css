@@ -5,14 +5,31 @@
 (231,220,140) - yellow
 (132,206,185) - green tealish
 (102,129,165) - blue/idigo
-
-
-
 */
 body {
     background-color: rgb(162,236,215);
 }
 
+.btn-warning{
+    background-color: rgb(380,226,100);
+    outline:rgb(234,220,140);
+    color:rgb(37, 37, 102);
+    border-radius:100px;
+    font-family:fantasy;
+    
+}
+
+.btn-danger{
+    outline:rgb(0, 0, 0);
+    text-align: center;
+}
+
+.btn-primary{
+    outline:rgb(0, 0, 0);
+}
+.playbutton {
+    margin-bottom: 0px;
+}
 .icon {
     height:40px;
     width:40px; 
@@ -23,9 +40,35 @@ body {
     background-image: var(--bs-gradient) !important ;
 }
 
-
-.disgplay {
-    width:800px;
-    height:600px;
-    background-color: blue;
+.h1{
+    font-family: fantasy;
+    font-size: 45;
 }
+
+.h2{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.h3{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.h4{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.h5{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+footer{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.signinupcards {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.border-top{
+    border-top-color:rgb(0, 0, 0);
+}
+
