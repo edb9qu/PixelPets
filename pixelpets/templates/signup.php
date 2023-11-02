@@ -29,23 +29,23 @@
                 <header class="h1">Create a new Account</header>
                 <header class="h2"></header>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput1" placeholder="admin" name="username">
+                    <input type="text" class="form-control" id="floatingInput1" placeholder="admin" name="username" value=<?php echo $uname?> >
                     <label for="floatingInput1">Create a Username</label>
                   </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput2" placeholder="name@example.com" name="email">
+                    <input type="text" class="form-control" id="floatingInput2" placeholder="name@example.com" name="email" value=<?php echo $email?> >
                     <label for="floatingInput2">Email address</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingPassword1" placeholder="Password" name="pass">
+                    <input type="text" class="form-control" id="floatingPassword1" placeholder="Password" name="pass" required>
                     <label for="floatingPassword1">Your Password</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingPassword2" placeholder="Password" name="pass2">
+                    <input type="text" class="form-control" id="floatingPassword2" placeholder="Password" name="pass2" required>
                     <label for="floatingPassword2">Retype Password</label>
                   </div>
                 <div class="form-floating mb-3">
-                  <select class="form-select" aria-label="Default select example" name="selection">
+                  <select class="form-select" aria-label="Default select example" name="selection" value=<?php echo $selec?> required>
                     <option selected>Select</option>
                     <option value="1">I am over the age of 13</option>
                     <option value="2">I have an adult's permission to join PixelPet</option>

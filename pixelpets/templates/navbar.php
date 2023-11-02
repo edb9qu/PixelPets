@@ -21,12 +21,27 @@
             </div>
         </li>
         
-
+        
         <li class="nav-item username ">
             <div class="align-self-center d-flex ">
-                <form method="post" action="?command=loginpage">
-                    <button class="nav-link d-inline text-info " type="submit">Sign In</button>
-                </form>
+                <?php
+                    if(!isset($_SESSION["username"])) {
+                        ?>
+                            <form method="post" action="?command=loginpage">
+                                <button class="nav-link d-inline text-info " type="submit">Sign In</button>
+                            </form>
+                        <?php
+                    }
+                    else {
+                        ?>
+                        <?php echo $_SESSION["username"]; ?>
+                        <form method="post" action="?command=logout">
+                                <button class="nav-link d-inline text-info " type="submit">Log out</button>
+                        </form>
+                        <?php
+                    }
+
+                ?>
                 <img  class= "d-inline" style="height:30px;" src="static/account.png" alt="account picture">
             
             </div>

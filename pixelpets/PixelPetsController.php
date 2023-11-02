@@ -16,6 +16,8 @@
                 $command = $this->input["command"];
     
             switch($command) {
+                case "play":
+                    $this->showPlay();
                 case "signup":
                     $this->signup();
                     break;
@@ -48,12 +50,12 @@
         public function signup() {
             if($_POST["pass"] != $_POST["pass2"]) {
                 $message = "Your passwords must match!";
-                $this->showSignup($message);
+                $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
                 return;
             }
             if($_POST["selection"] == 3) {
                 $message = "You're not old enough and approved enough! We've contacted your parents and called the police.";
-                $this->showSignup($message);
+                $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
                 return;
             }
             $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
@@ -68,13 +70,13 @@
                 
                 // Send user to the appropriate page (question)
                 // header("Location: ?command=question");
-                echo "CREATED USER";
-                header("Location: ?command=loginpage");
+                // echo "CREATED USER";
+                include("templates/play.php");
                 return;
             }
             else {
                 
-                $this->showSignup("This user already exists.");
+                $this->showSignup("This user already exists.", $_POST["username"],$_POST["email"],$_POST["selection"]);
                 return;
             }
         }
@@ -88,9 +90,9 @@
                     // Check if user is in database
                     $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
 
-                    if (!preg_match("^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$",($_POST["email"]))){
-                        $errorMessage = "Invalid email";
-                    }
+                    // if (!preg_match("^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$",($_POST["email"]))){
+                    //     $errorMessage = "Invalid email";
+                    // }
 
                     if (!empty($res)) {
                         // print_r($res);
@@ -120,6 +122,7 @@
             }
             // If something went wrong, show the welcome page again
             // $errorMessage = "something went wrong";
+            
             $this->showLogin($errorMessage);
         }
         public function showPlay(){
@@ -129,7 +132,7 @@
             
             include("templates/loginchoice.php");
         }
-        public function showSignup($errorMessage = "") {
+        public function showSignup($errorMessage = "", $uname = "", $email = "", $selec = 0) {
             
             include("templates/signup.php");
         }
