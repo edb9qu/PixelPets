@@ -17,16 +17,18 @@
             <div class = "display"></div>
                 <header class="h1">Account Log In</header>
                 <header class="h2"></header>
-                <div class="form-floating mb-3">
-                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                    <label for="floatingInput">Email address</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
-                  </div>
-                  <button class="btn btn-primary" type="submit">Let's Play!</button>
-                  <br>
+                <form method="post" action="?command=login">
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name = "pass">
+                        <label for="floatingPassword">Password</label>
+                    </div>
+                    <button class="btn btn-primary" type="submit">Let's Play!</button>
+                    <br>
+                </form>
                   <i>Don't have an account?</i>
                     <form method="post" action="?command=signuppage">
                         <button type="submit" class=" text-primary p-0" style="text-decoration: none ;">Sign Up</button>

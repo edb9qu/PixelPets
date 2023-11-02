@@ -3,14 +3,19 @@
         public function __construct($input) {
             session_start();
             $this->input = $input;
+            // print_r($input);
         }
         public function run() {
             // Get the command
-            $command = "welcome";
+            $command = "home";
+
             if (isset($this->input["command"]))
                 $command = $this->input["command"];
     
             switch($command) {
+                case "signup":
+                    $this->signup();
+                    break;
                 case "signuppage":
                     $this->showSignup();
                     break;
@@ -37,22 +42,30 @@
         }
         public function login() {
 
-            if(isset($_POST["name"])) {
-                $_SESSION["name"] = $_POST["name"];
-            }
-    
-            if(isset($_POST["email"])) {
-                $_SESSION["email"] = $_POST["email"];
-            }
+            // print_r($_POST);
             
             // echo "made new playing";
     
+        }
+        public function signup() {
+            // print_r($_POST);
+            if($_POST["pass"] != $_POST["pass2"]) {
+                $message = "<div class=\"alert alert-danger\" role=\"alert\">Your passwords must match!</div>";
+                $this->showSignup($message);
+                return;
+            }
+            if($_POST["selection"] == 3) {
+                $message = "<div class=\"alert alert-danger\" role=\"alert\">You're not old enough to play!</div>";
+                $this->showSignup($message);
+                return;
+            }
+            
         }
         public function showLoginChoice() {
             
             include("templates/loginchoice.php");
         }
-        public function showSignup() {
+        public function showSignup($message = "") {
             
             include("templates/signup.php");
         }
