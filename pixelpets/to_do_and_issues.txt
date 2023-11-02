@@ -1,0 +1,6 @@
+-after asher sets up the data base, login needs to check if the user input is in the data base and if not, prompt them to sign up
+
+-once data is submited to sign up, take you to play
+
+-same user name?
+

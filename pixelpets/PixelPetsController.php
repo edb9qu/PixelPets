@@ -16,17 +16,22 @@
                 $command = $this->input["command"];
     
             switch($command) {
+                case "loginchoice":
+                    if(!isset($_SESSION["username"])) {
+                        $this->showLoginChoice();
+                        break;
+                    }
                 case "play":
                     $this->showPlay();
+                    break;
                 case "signup":
                     $this->signup();
                     break;
                 case "signuppage":
                     $this->showSignup();
                     break;
-                case "loginchoice":
-                    $this->showLoginChoice();
-                    break;
+                
+                    
                 case "loginpage":
                     $this->showLogin();
                     break;
@@ -48,6 +53,11 @@
         }
         
         public function signup() {
+            if($_POST["username"] =="" || $_POST["email"] == "") {
+                $message = "You must have a name and/or email!";
+                $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
+                return;
+            }
             if($_POST["pass"] != $_POST["pass2"]) {
                 $message = "Your passwords must match!";
                 $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
@@ -83,7 +93,7 @@
         public function login() {
             // need a name, email, and password
             $errorMessage = "";
-            if( isset($_POST["email"]) && !empty($_POST["email"]) &&
+            if( isset($_POST["username"]) && !empty($_POST["username"]) && isset($_POST["email"]) && !empty($_POST["email"]) &&
                 isset($_POST["pass"]) && !empty($_POST["pass"])) {
                     
                 
@@ -137,7 +147,7 @@
             include("templates/signup.php");
         }
         public function showHome($errorMessage = "") {
-            print_r($_SESSION);
+            // print_r($_SESSION);
             include("templates/mainpage.php");
         }
         public function logout() {

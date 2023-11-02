@@ -11,38 +11,47 @@
         <li class="p-1 nav-item d-flex flex-column align-items-start">
             <div>
                 <img class = "icon align-self-center" src="static/account.png" alt="help picture">
-                <a class="nav-link text-center" href="#">Help</a>
+                <form action="?command=help" method="post">
+                    <button class="nav-link text-center"  type="submit">Help</button>
+                </form>
+
             </div>
         </li>
         <li class="p-1 nav-item d-flex flex-column align-items-start w-100">
             <div>
                 <img class = "icon align-self-center" src="static/account.png" alt="about picture">
-                <a class="nav-link text-center" href="#">About</a>
+                
+                <form action="?command=about" method="post">
+                    <button class="nav-link text-center"  type="submit">About</button>
+                </form>
             </div>
         </li>
         
         
         <li class="nav-item username ">
-            <div class="align-self-center d-flex ">
+            <div class="align-self-center d-flex align-middle ">
                 <?php
                     if(!isset($_SESSION["username"])) {
                         ?>
                             <form method="post" action="?command=loginpage">
-                                <button class="nav-link d-inline text-info " type="submit">Sign In</button>
+                                <button class="nav-link d-inline text-info m-auto " type="submit">Sign In</button>
                             </form>
+                            <img  class= "d-inline" style="height:30px;" src="static/account.png" alt="account picture">
                         <?php
+                        
                     }
                     else {
                         ?>
-                        <?php echo $_SESSION["username"]; ?>
+
+                        <span class = "align-baseline"> <?php echo $_SESSION["username"]; ?> </span>
                         <form method="post" action="?command=logout">
-                                <button class="nav-link d-inline text-info " type="submit">Log out</button>
+                            <button class="nav-link d-inline text-info " type="submit">Log out</button>
                         </form>
                         <?php
                     }
 
                 ?>
-                <img  class= "d-inline" style="height:30px;" src="static/account.png" alt="account picture">
+                
             
             </div>
         </li>

@@ -6,9 +6,15 @@
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class=" nav-link p-0 text-secondary" href="index.html">Home</a></li>
-            <li class="ms-3"><a class="nav-link p-0 text-secondary" href="#">Help</a></li>
-            <li class="ms-3"><a class="nav-link p-0 text-secondary" href="#">About</a></li>
+            <form method="post" action="?command=home">
+                <li class="ms-3"><button class=" nav-link p-0 text-secondary" type="submit">Home</button></li>
+            </form>
+            <form method="post" action="?command=help">
+                <li class="ms-3"><button class=" nav-link p-0 text-secondary" type="submit">Help</button></li>
+            </form><form method="post" action="?command=about">
+                <li class="ms-3"><button class=" nav-link p-0 text-secondary" type="submit">About</button></li>
+            </form>
+            
         </ul>
     </footer>
 </div>

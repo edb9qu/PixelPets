@@ -8,14 +8,16 @@
         <meta name="author" content="Asher Saunders, Lain Bowman (we used the Visual Studio Code Live Share addon to work together)">
         
         <!--We may still need to add bootstrap? or is it at the bottom-->
-        <title>Login</title>
+        <title>Play</title>
     </head>
     <body>
         <?php
             
             include("navbar.php");
         ?>
-        <div class="container h-auto">
+        <div class="container-fluid">
+            
+        </div>
         </div>
     </body>
     <?php
