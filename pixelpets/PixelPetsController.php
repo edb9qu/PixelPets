@@ -60,7 +60,7 @@
             }
             if($_POST["pass"] != $_POST["pass2"]) {
                 $message = "Your passwords must match!";
-                $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
+                $this->showSignup($message,                                                              $_POST["username"],$_POST["email"],$_POST["selection"]);
                 return;
             }
             if($_POST["selection"] == 3) {
@@ -93,7 +93,7 @@
         public function login() {
             // need a name, email, and password
             $errorMessage = "";
-            if( isset($_POST["username"]) && !empty($_POST["username"]) && isset($_POST["email"]) && !empty($_POST["email"]) &&
+            if( isset($_POST["email"]) && !empty($_POST["email"]) &&
                 isset($_POST["pass"]) && !empty($_POST["pass"])) {
                     
                 
