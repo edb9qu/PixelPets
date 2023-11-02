@@ -25,22 +25,21 @@
     }
 
     // Drop tables and sequences
-    $res  = pg_query($dbHandle, "drop sequence if exists question_seq;");
+    $res  = pg_query($dbHandle, "drop sequence if exists pet_seq;");
     $res  = pg_query($dbHandle, "drop sequence if exists user_seq;");
-    $res  = pg_query($dbHandle, "drop sequence if exists userquestion_seq;");
-    $res  = pg_query($dbHandle, "drop table if exists questions;");
+    $res  = pg_query($dbHandle, "drop table if exists pets;");
     $res  = pg_query($dbHandle, "drop table if exists users;");
 
     // Create sequences
-    $res  = pg_query($dbHandle, "create sequence question_seq;");
+    $res  = pg_query($dbHandle, "create sequence pet_seq;");
     $res  = pg_query($dbHandle, "create sequence user_seq;");
-    $res  = pg_query($dbHandle, "create sequence userquestion_seq;");
-
+    
     // Create tablse
-    $res  = pg_query($dbHandle, "create table questions (
-            id  int primary key default nextval('question_seq'),
-            question    text,
-            answer      text
+    $res  = pg_query($dbHandle, "create table pets (
+            id  int primary key default nextval('pet_seq'),
+            name text,
+            owneremail text,
+            json text
     );");
     $res  = pg_query($dbHandle, "create table users (
             id  int primary key default nextval('user_seq'),

@@ -15,8 +15,36 @@
             
             include("navbar.php");
         ?>
-        <div class="container-fluid">
-            
+        <div class="container-fluid grassy">
+            <h1>My Pixel Pets!</h1>
+                <form class = "col-md-auto" method="post" action = "?command=petcreation">
+                    <button type="submit" class = "btn btn-primary">New Pet</button>
+                    
+                </form>
+            <div class ="container-fluid justify-content-center g-3  row w-100">
+                
+                <?php 
+                    $res = $this->db->query("select * from pets where owneremail = $1;", $_SESSION["email"]);
+                    
+                    foreach($res as $key => $pet) {
+                        ?>
+                            <div class="card p-2 m-4" style="width: 18rem;">
+                                <h5 class="card-title"><?php echo $pet["name"];?></h5>
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                            
+                                </div>
+                                <p class="card-text"><?php echo $pet["json"];?></p>
+                                <form method="post" action=<?php echo "?command=visit&"; echo "email=";echo $_SESSION["email"];echo "&id=";echo $key;?> >
+                                    <button href="#" class="btn btn-primary">Visit <?php echo $pet["name"]?></Button>
+                                </form>
+                            </div>
+                            
+                        <?php
+                            
+                    }
+                ?>
+            </div>
         </div>
         </div>
     </body>

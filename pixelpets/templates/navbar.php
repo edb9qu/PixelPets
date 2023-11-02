@@ -28,6 +28,7 @@
         </li>
         
         
+        
         <li class="nav-item username ">
             <div class="align-self-center d-flex align-middle ">
                 <?php
@@ -41,8 +42,17 @@
                         
                     }
                     else {
+                        
                         ?>
-
+                        <li class="p-1 nav-item d-flex flex-column align-items-start w-100">
+                            <div>
+                                <img class = "icon align-self-center" src="static/account.png" alt="about picture">
+                                
+                                <form action="?command=play" method="post">
+                                    <button class="nav-link text-center"  type="submit">My Pets</button>
+                                </form>
+                            </div>
+                        </li>
                         <span class = "align-baseline"> <?php echo $_SESSION["username"]; ?> </span>
                         <form method="post" action="?command=logout">
                             <button class="nav-link d-inline text-info " type="submit">Log out</button>
