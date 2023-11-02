@@ -11,39 +11,8 @@
         <title>Signup</title>
     </head>
     <body>
-        <nav class="navbarnavbar-light bg-light flex-wrap p-0">
-            
-           
-            <ul class="navbar-nav flex-row container-fluid flex-nowrap">
-                <li class="p-1 nav-item d-flex flex-column justify-content-center align-self-start">
-                    <img class= "icon align-self-center" src="static/account.png" alt ="home picture">
-                    <a class="nav-link text-center" href="index.html">Home</a>
-                </li>
-                <li class="p-1 nav-item d-flex flex-column align-items-start">
-                    <div>
-                        <img class = "icon align-self-center" src="static/account.png" alt="help picture">
-                        <a class="nav-link text-center" href="#">Help</a>
-                    </div>
-                </li>
-                <li class="p-1 nav-item d-flex flex-column align-items-start w-100">
-                    <div>
-                        <img class = "icon align-self-center" src="static/account.png" alt="about picture">
-                        <a class="nav-link text-center" href="#">About</a>
-                    </div>
-                </li>
-                
-
-                <li class="nav-item username ">
-                    <div class="align-self-center d-flex ">
-                        <a class="nav-link d-inline text-info " href="loginchoice.html">Sign In</a>
-                        <img  class= "d-inline" style="height:30px;" src="static/account.png" alt="account picture">
-                    
-                    </div>
-                </li>
-            </ul>
-            
-                
-        </nav>
+        <?php include("navbar.php");
+        ?>
         
         <div class="m-5 container-f justify-content-center flex-column window">
             <div class = "display"></div>
@@ -77,25 +46,14 @@
 
                 <br>
                 <i>Already have an account?</i>
-                <a href="login.html" style="text-decoration: none;">Log in!</a>
+                <form method="post" action="?command=loginpage">
+                    <button type="submit" style="text-decoration: none;">Log in!</button>
+                </form>
+                
               </div>
         
       
-          <div class="container">
-              <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-                <div class="col-md-4 d-flex align-items-center">
-                  
-                  <span class="mb-3 mb-md-0 text-muted">copyright 2022 aas9x/edb9qu, Inc</span>
-                </div>
-            
-                <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-                  <li class="ms-3"><a class=" nav-link p-0 text-secondary" href="index.html">Home</a></li>
-                  <li class="ms-3"><a class="nav-link p-0 text-secondary" href="#">Help</a></li>
-                  <li class="ms-3"><a class="nav-link p-0 text-secondary" href="#">About</a></li>
-                  </ul>
-                </footer>
-            </div>
-          
+        <?php include("footer.php");?>
               
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
