@@ -11,6 +11,10 @@
     </head>
     <body>
         <?php include("navbar.php");
+        
+        if($errorMessage != "") {
+            echo "<div class=\"alert alert-danger\" role=\"alert\">$errorMessage</div>";
+        }
         ?>
         
         <div class="m-5 container-f justify-content-center flex-column window">
@@ -22,12 +26,17 @@
                         <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" name="email">
                         <label for="floatingInput">Email address</label>
                     </div>
+                    
                     <div class="form-floating mb-3">
                         <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name = "pass">
                         <label for="floatingPassword">Password</label>
+                        
                     </div>
+                    
                     <button class="btn btn-primary" type="submit">Let's Play!</button>
                     <br>
+
+                    
                 </form>
                   <i>Don't have an account?</i>
                     <form method="post" action="?command=signuppage">

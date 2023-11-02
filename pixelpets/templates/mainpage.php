@@ -12,6 +12,7 @@
     <body>
         
         <?php include("navbar.php");
+        echo $errorMessage;
         ?>
         
         <div class="m-5 container-f justify-content-center flex-column window">

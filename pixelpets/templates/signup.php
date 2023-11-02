@@ -15,7 +15,11 @@
         ?>
         <div class="row">
                 <div class="col-xs-12">
-                    <?=$message?>
+                    <?php 
+                      if($errorMessage != "") {
+                        echo "<div class=\"alert alert-danger\" role=\"alert\">$errorMessage</div>";
+                      }
+                    ?>
                     
                 </div>
             </div>
