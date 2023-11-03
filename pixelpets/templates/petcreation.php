@@ -38,6 +38,7 @@
 
                 
                 <button class="btn btn-primary" type="submit">Finish and Save Pet</button>
+                
                 <!--- in the future, when we have pet images, these can be written to JSON as atributites-->
             </form>
             

@@ -21,7 +21,8 @@
                 $res = $this->db->query("select * from pets where owneremail = $1;", $email);
                 $pet= $res[$id];
                 
-                ?>
+            ?>
+        
                     <div class="card p-2 m-4" style="width: 18rem;">
                         <h5 class="card-title"><?php echo $pet["name"];?></h5>
                         <img src="..." class="card-img-top" alt="...">
@@ -38,7 +39,13 @@
                                 <input type="hidden" name = "email" value=<?php echo $_SESSION["email"];?>>
                                 
                             </form>
-                            
+                            <form method="get" action="" >
+                                <input type="hidden" name = "command" value = "data">
+                                <input type="hidden" name = "name" value= <?php echo urlencode($pet["name"]);?>>
+                                <button href="#" class="btn btn-danger">Get data for <?php echo urlencode($pet["name"]);?></Button>
+                                <input type="hidden" name = "email" value=<?php echo $_SESSION["email"];?>>
+                                
+                            </form>
                         <?php
                             }
                         ?>

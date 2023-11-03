@@ -6,6 +6,7 @@ ini_set("display_errors", 1);
 spl_autoload_register(function ($classname) {
     // echo getcwd();
     include "pixelpets/$classname.php";
+    
 
 });
         

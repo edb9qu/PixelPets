@@ -3,7 +3,7 @@
         public function __construct($input) {
             session_start();
             $this->input = $input;
-
+            // print_r($input); 
            
             $this->db = new Database();
             // print_r($input);
@@ -16,6 +16,9 @@
                 $command = $this->input["command"];
     
             switch($command) {
+                case "data":
+                    $this->getPetData();
+                    break;
                 case "loginchoice":
                     if(!isset($_SESSION["username"])) {
                         $this->showLoginChoice();
@@ -68,6 +71,21 @@
                 $id = $this->input["id"];
             
             include("templates/pet.php");
+        }
+        public function getPetData() {
+            $email = $_GET["email"];
+            $name = $_GET["name"];
+            // if (isset($this->input["email"]))
+            //     $email = $this->input["email"];
+            // if (isset($this->input["id"]))
+            //     $id = $this->input["id"];
+            $res = $this->db->query("select * from pets where owneremail = $1 and name = $2;", $_GET["email"], $_GET["name"]);
+            if(!empty($res))
+                // print_r($res[0]);
+                // echo $res[0]["json"];
+                echo(($res[0]["json"]));
+            // $json = json_decode(array($_GET["body"], $_GET["head"], $_GET["ears"], $_GET["tail"]));
+            // include($json);
         }
         
         public function release() {
@@ -136,7 +154,7 @@
                 // User was not there, so insert them
                 
                 $json = "[\"skin\" = \"blue\"]";
-                $json = json_encode(array($_POST["body"], $_POST["head"], $_POST["ears"], $_POST["tail"]));
+                $json = json_encode(array("body" => $_POST["body"], "head" => $_POST["head"], "ears" => $_POST["ears"], "tail" => $_POST["tail"]));
                 $this->db->query("insert into pets (name, owneremail, json) values ($1, $2, $3);",
                     $_POST["name"], $_SESSION["email"],$json);
                 
