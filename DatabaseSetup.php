@@ -42,7 +42,8 @@
             id  int primary key default nextval('pet_seq'),
             name text,
             owneremail text,
-            json text
+            json text,
+            pets_count int
     );");
     $res  = pg_query($dbHandle, "create table users (
             id  int primary key default nextval('user_seq'),

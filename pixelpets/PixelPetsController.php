@@ -27,6 +27,15 @@
                 case "play":
                     $this->showPlay();
                     break;
+                case "profile":
+                    $this->showProfile();
+                    break;
+                case "addpet":
+                    $this->addpet();
+                    break;
+                case "gallery":
+                    $this->showGallery();
+                    break;
                 case "addfriend":
                     $this->addFriend();
                     break;
@@ -88,6 +97,10 @@
             $username = $_SESSION["username"];
             include("templates/friends.php");
         }
+        public function showGallery() {
+            
+            include("templates/gallery.php");
+        }
         public function showVisit() {
             if (isset($this->input["email"]))
                 $email = $this->input["email"];
@@ -95,6 +108,22 @@
                 $id = $this->input["id"];
             
             include("templates/pet.php");
+        }
+        public function addpet() {
+            if (isset($this->input["email"]))
+                $email = $this->input["email"];
+            if (isset($this->input["name"]))
+                $name = $this->input["name"];
+
+            $res = $this->db->query("select * from pets where owneremail = $1 and name = $2;", $email, $name);
+            $count = 0;
+            if(!empty($res))
+                // print_r($res[0]);
+                // echo $res[0]["json"];
+                $count = $res[0]["pets_count"] + 1;
+            $this->db->query("update pets set pets_count = $1 where owneremail = $2 and name = $3;", $count, $email, $name);
+
+            echo "$name has been pet $count times.";
         }
         public function accept() {
             // echo $_POST["acceptedusername"];
@@ -115,11 +144,11 @@
             }
             $res = $this->db->query("select * from users where username = $1", $_POST["acceptedusername"]);
             if(isset($res[0]["friends"])) {
-                print_r($res[0]["friends"]);
+                // print_r($res[0]["friends"]);
                 $friends = json_decode($res[0]["friends"]);
                 array_push($friends, $_SESSION["username"]);
-                echo "HERE\n";
-                print_r($friends);
+                // echo "HERE\n";
+                // print_r($friends);
                 $this->db->query("update users set friends = $1 where username = $2", json_encode($friends), $_POST["acceptedusername"]);
 
             }
@@ -199,7 +228,9 @@
             if(!empty($res))
                 // print_r($res[0]);
                 // echo $res[0]["json"];
-                echo(($res[0]["json"]));
+                // echo(($res[0]["json"]));
+                echo json_encode(array("json"=>$res[0]["json"], "pets_count"=>$res[0]["pets_count"]));
+
             // $json = json_decode(array($_GET["body"], $_GET["head"], $_GET["ears"], $_GET["tail"]));
             // include($json);
         }
@@ -279,8 +310,8 @@
                 // print_r($_POST);
                 // $json = json_encode(array("body" => $_POST["body"], "head" => $_POST["head"], "ears" => $_POST["ears"], "tail" => $_POST["tail"]));
                 $json = json_encode($_POST);
-                $this->db->query("insert into pets (name, owneremail, json) values ($1, $2, $3);",
-                    $_POST["name"], $_SESSION["email"],$json);
+                $this->db->query("insert into pets (name, owneremail, json, pets_count) values ($1, $2, $3, $4);",
+                    $_POST["name"], $_SESSION["email"],$json, 0);
                 
                 include("templates/play.php");
                 return;
@@ -303,9 +334,6 @@
                     // Check if user is in database
                     $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
 
-                   
-
-                    
 
                     
                     if (!empty($res)) {
@@ -342,6 +370,12 @@
         }
         public function showPlay(){
             include("templates/play.php");
+        }
+        public function showProfile(){
+            $email="null";
+            if (isset($this->input["email"]))
+                $email = $this->input["email"];
+            include("templates/profile.php");
         }
         public function showAbout($errorMessage=""){
             include("templates/about.php");

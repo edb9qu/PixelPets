@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"
         integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title>Play</title>
+    <title>Friends</title>
 
 </head>
 
@@ -43,9 +43,16 @@
         $res = $this->db->query("select * from users where email = $1", $email);
         // print_r(json_decode($res[0]["friends"]));
         if (isset($res[0]["friends"])) {
-            print_r($res[0]["friends"]);
+            // print_r($res[0]["friends"]);
+
             foreach(json_decode($res[0]["friends"]) as $friend) {
-                echo $friend;
+                // echo $friend;
+                $res = $this->db->query("select * from users where username = $1", $friend);
+                $email =  $res[0]["email"];
+                ?> <form method ="post" action="?command=profile&email=<?php echo $email ?>">
+                    <button type="submit">Visit <?php echo $friend ?></button>
+                    </form>
+                    <?php
             }
         } else {
             echo "You have no PixelPals...yet! Add some!";

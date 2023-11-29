@@ -1,0 +1,5 @@
+HOST = "localhost"
+PORT = "5432"
+DATABASE = "aas9x"
+USER = "aas9x"
+PASSWORD = "q3MuMAnZmkjZ"

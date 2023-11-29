@@ -4,9 +4,7 @@
     <ul class="navbar-nav flex-row container-fluid flex-nowrap">
         <li class="p-1 nav-item d-flex flex-column align-items-start">
             <div>
-                <img class="crisp align-self-center" src="static/headerlogo.png" alt="PixelPet"
-                height="75"
-                width="140">
+                <img class="crisp align-self-center" src="static/headerlogo.png" alt="PixelPet" height="75" width="140">
                 <form action="?command=home" method="post">
                     <button class="nav-link text-center" type="submit"></button>
                 </form>
@@ -55,6 +53,16 @@
 
                     ?>
                 </div>
+            <li class="p-1 nav-item d-flex flex-column justify-content-center align-items-start ">
+                <div>
+                    <img class="icon align-self-center" src="static/gallery.png" alt="gallery">
+
+                    <form action="?command=gallery" method="post">
+                        <button class="nav-link text-center" type="submit">Gallery</button>
+                    </form>
+                </div>
+
+            </li>
             <li class="p-1 nav-item d-flex flex-column justify-content-center align-items-start">
                 <div>
                     <img class="icon align-self-center" src="static/friends.png" alt="friends picture">

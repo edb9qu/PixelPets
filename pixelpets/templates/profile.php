@@ -12,7 +12,7 @@
         integrity="sha512-+k1pnlgt4F1H8L7t3z95o3/KO+o78INEcXTbnoJQ/F2VqDVhWoaiVml/OEHv9HsVgxUaVW+IbiZPUJQfF/YxZw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!--We may still need to add bootstrap? or is it at the bottom-->
-    <title>Play</title>
+    <title>Profile</title>
 </head>
 
 <body>
@@ -21,31 +21,32 @@
     include("navbar.php");
     ?>
     <div class="container-fluid grassy">
-        <h1>My Pixel Pets!</h1>
-        <form class="col-md-auto" method="post" action="?command=petcreation">
-            <button type="submit" class="btn btn-primary">New Pet</button>
-
-        </form>
+    <?php
+            $res = $this->db->query("select * from pets where owneremail = $1;", $email);
+            $usern = $this->db->query("select * from users where email = $1", $email)[0]["username"];
+            echo "<h1>Here are ",$usern;?>
+        's Pixel Pets!</h1>
         <div class="container-fluid justify-content-center g-3  row w-100">
 
             <?php
-            $res = $this->db->query("select * from pets where owneremail = $1;", $_SESSION["email"]);
             $delay = 0;
+            
             foreach ($res as $key => $pet) {
                 ?>
 
                 <div class="card p-2 m-4" style="width: 18rem;">
                     <h5 class="card-title">
-                        <?php echo $pet["name"]; ?>
+                        <?php echo $pet["name"]; ?> 
                     </h5>
                     <div ><?php echo $pet["name"];?> has been pet 
-                    <p style="display:inline;" id="<?php echo $pet["name"]?>count"></p> times </div>
-                    <div class="display-render" style="<?php echo "animation-delay:",$delay, "ms"; $delay += 200;?>" id="<?php echo $pet["name"]; ?>">
+                    <p style="display:inline;" id="<?php echo $pet["id"]?>count"></p> times </div>
+                    <div class="display-render" style="<?php echo "animation-delay:",$delay, "ms"; $delay += 200;?>" id="<?php echo ($pet["id"]); ?>">
                         
                     </div>
                     <script>
+                        console.log("<?php echo $pet["id"]?>");
                         var ajax = new XMLHttpRequest();
-                        var comm = "?command=data&name=<?php echo $pet["name"]; echo "&email="; echo $_SESSION["email"];?>";
+                        var comm = "?command=data&name=<?php echo $pet["name"]; echo "&email="; echo $email;?>";
                         ajax.open("GET", comm, true);
                         ajax.responseType = "json"
                         ajax.send(null);
@@ -54,8 +55,8 @@
                                 json = this.response;
                                 console.log(JSON.parse(json["json"]));
                                 console.log(json["pets_count"]);
-                                render(document.getElementById("<?php echo $pet["name"]?>"),JSON.parse(json["json"]));
-                                $("#<?php echo $pet["name"]?>count").text(json["pets_count"]);
+                                render(document.getElementById("<?php echo $pet["id"]?>"),JSON.parse(json["json"]));
+                                $("#<?php echo $pet["id"]?>count").text(json["pets_count"]);
 
                             }
                         });
@@ -66,7 +67,7 @@
                     </p> -->
                     <form method="post" action=<?php echo "?command=visit&";
                     echo "email=";
-                    echo $_SESSION["email"];
+                    echo $email;
                     echo "&id=";
                     echo $key; ?>>
                         <button href="#" class="btn btn-primary">Visit
