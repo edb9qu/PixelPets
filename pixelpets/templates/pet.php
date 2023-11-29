@@ -23,10 +23,10 @@
     include("navbar.php");
     ?>
     <div class="container-fluid grassy d-flex justify-content-center">
-
+        
         <?php
         $res = $this->db->query("select * from pets where owneremail = $1;", $email);
-        
+
         $pet = $res[$id];
 
         ?>
@@ -36,14 +36,16 @@
                 <h5 class="petname">
                     <?php echo $pet["name"]; ?>
                 </h5>
+                
             </div>
+            <div class="align-self-center text-centered" id="message"></div>
             <div class="card-body">
 
             </div>
             <div>
-                <img src="static/food.png" class="pet-actions crisp" id="food" style="display:none;" alt="food bowl">
+                <!-- <img src="static/food.png" class="pet-actions crisp" id="food" style="display:none;" alt="food bowl">
                 <img src="static/ball.png" class="pet-actions crisp" id="ball" style="display:none;" alt="ball">
-                <img src="static/heart.png" class="pet-actions crisp" id="heart" style="display:none;" alt="heart">
+                <img src="static/heart.png" class="pet-actions crisp" id="heart" style="display:none;" alt="heart"> -->
                 <div class="play-render" id="<?php echo $pet["name"]; ?>">
 
                 </div>
@@ -59,7 +61,7 @@
                             setTimeout(function () { $('#food').hide(); }, 750);
                         });
                     </script>
-
+                    
                     <button id="play" class="btn ballbutton">Play with
                         <?php echo $pet["name"]; ?>
                     </Button>
@@ -89,7 +91,9 @@
                                 $.get(comm, {}, function (data) {
                                     // alert("Data Loaded: " + data);
                                     console.log(data);
-                                    alert(data);
+                                    
+                                    // alert(data);
+                                    $("#message").text(data);
 
                                 })
 
@@ -112,6 +116,16 @@
                         if (this.status == 200) {
                             json = this.response;
                             render(document.getElementById("<?php echo $pet["name"] ?>"), JSON.parse(json["json"]));
+                            for (const i of ["food", "ball", "heart"]) {
+                                var im = document.createElement("img");
+                                im.src = "static/" + i + ".png";
+                                im.className = "pet-actions crisp";
+                                im.id = i;
+                                im.style.display = "none";
+                                alt = i + "picture";
+                                document.getElementById("<?php echo $pet["name"]?>").appendChild(im);
+                            }
+
                             console.log(json);
                         }
                     });

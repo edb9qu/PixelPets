@@ -47,11 +47,11 @@
                     <p>Owner: <?php echo $this->db->query("select * from users where email = $1;", $pet["owneremail"])[0]["username"];?> </p>
                     <div>
                         <?php echo $pet["name"]; ?> has been pet
-                        <p style="display:inline;" id="<?php echo $pet["name"] ?>count"></p> times
+                        <p style="display:inline;" id="<?php echo $pet["id"] ?>count"></p> times
                     </div>
                     <div class="display-render" style="<?php echo "animation-delay:", $delay, "ms";
                     $delay += 200; ?>"
-                        id="<?php echo $pet["name"]; ?>">
+                        id="<?php echo $pet["id"]; ?>">
 
                     </div>
                     <script>
@@ -67,8 +67,8 @@
                                 json = this.response;
                                 console.log(JSON.parse(json["json"]));
                                 console.log(json["pets_count"]);
-                                render(document.getElementById("<?php echo $pet["name"] ?>"), JSON.parse(json["json"]));
-                                $("#<?php echo $pet["name"] ?>count").text(json["pets_count"]);
+                                render(document.getElementById("<?php echo $pet["id"] ?>"), JSON.parse(json["json"]));
+                                $("#<?php echo $pet["id"] ?>count").text(json["pets_count"]);
 
                             }
                         });

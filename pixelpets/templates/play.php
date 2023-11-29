@@ -39,8 +39,8 @@
                         <?php echo $pet["name"]; ?>
                     </h5>
                     <div ><?php echo $pet["name"];?> has been pet 
-                    <p style="display:inline;" id="<?php echo $pet["name"]?>count"></p> times </div>
-                    <div class="display-render" style="<?php echo "animation-delay:",$delay, "ms"; $delay += 200;?>" id="<?php echo $pet["name"]; ?>">
+                    <p style="display:inline;" id="<?php echo $pet["id"]?>count"></p> times </div>
+                    <div class="display-render" style="<?php echo "animation-delay:",$delay, "ms"; $delay += 200;?>" id="<?php echo $pet["id"]; ?>">
                         
                     </div>
                     <script>
@@ -54,8 +54,8 @@
                                 json = this.response;
                                 console.log(JSON.parse(json["json"]));
                                 console.log(json["pets_count"]);
-                                render(document.getElementById("<?php echo $pet["name"]?>"),JSON.parse(json["json"]));
-                                $("#<?php echo $pet["name"]?>count").text(json["pets_count"]);
+                                render(document.getElementById("<?php echo $pet["id"]?>"),JSON.parse(json["json"]));
+                                $("#<?php echo $pet["id"]?>count").text(json["pets_count"]);
 
                             }
                         });

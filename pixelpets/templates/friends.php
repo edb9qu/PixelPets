@@ -31,7 +31,7 @@
     }
     ?>
     <div id="error"> </div>
-    <div class="container-fluid grassy">
+    <div class="container-fluid textbacking">
         <div class="textbacking">
         <h1> PixelPals! </h1>
         </div>
