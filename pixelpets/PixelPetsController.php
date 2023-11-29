@@ -154,7 +154,9 @@
                 // User was not there, so insert them
                 
                 $json = "[\"skin\" = \"blue\"]";
-                $json = json_encode(array("body" => $_POST["body"], "head" => $_POST["head"], "ears" => $_POST["ears"], "tail" => $_POST["tail"]));
+                // print_r($_POST);
+                // $json = json_encode(array("body" => $_POST["body"], "head" => $_POST["head"], "ears" => $_POST["ears"], "tail" => $_POST["tail"]));
+                $json = json_encode($_POST);
                 $this->db->query("insert into pets (name, owneremail, json) values ($1, $2, $3);",
                     $_POST["name"], $_SESSION["email"],$json);
                 

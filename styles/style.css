@@ -6,8 +6,12 @@
 (132,206,185) - green tealish
 (102,129,165) - blue/idigo
 */
+html {
+    height:100%;
+}
 body {
     background-color: rgb(162,236,215);
+    height:100%;
 }
 
 .grassy{
@@ -75,3 +79,37 @@ footer{
     border-top-color:rgb(0, 0, 0);
 }
 
+
+.pet {
+    position:absolute;
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+    top:0;
+    left:0;
+    width:100%;
+    max-width: 500px;
+    display:block;
+      
+}
+
+.display-render{
+    position:relative;
+    
+    width:50%; 
+    min-width:200px;
+    max-width:400px;
+    padding-bottom: min(400px,75%);
+    max-height:400px;
+    display:block;
+}
+.creation-render{
+    position:relative;
+    
+    width:50%; 
+    min-width:200px;
+    max-width:400px;
+    padding-bottom: min(400px,50%);
+    max-height:400px;
+    display:block;
+}
