@@ -40,6 +40,7 @@ body {
 .icon {
     height:40px;
     width:40px; 
+    
 }
 
 .bg-light {
@@ -79,7 +80,11 @@ footer{
     border-top-color:rgb(0, 0, 0);
 }
 
-
+.crisp {
+    image-rendering: pixelated !important;
+    image-rendering: -moz-crisp-edges !important;
+    image-rendering: crisp-edges !important;
+}
 .pet {
     position:absolute;
     image-rendering: pixelated;
@@ -90,8 +95,10 @@ footer{
     width:100%;
     max-width: 500px;
     display:block;
+    z-index: 3;
       
 }
+
 
 .display-render{
     position:relative;
@@ -102,6 +109,10 @@ footer{
     padding-bottom: min(400px,75%);
     max-height:400px;
     display:block;
+    animation-name: runin;
+    animation-duration: 1s;
+    animation: sway 2s infinite;
+    animation-direction: alternate
 }
 .creation-render{
     position:relative;
@@ -112,4 +123,26 @@ footer{
     padding-bottom: min(400px,50%);
     max-height:400px;
     display:block;
+}
+
+@keyframes bounce {
+    from {top:100px;}
+    to {top:0px;}
+}
+
+@keyframes runin {
+    from {left:2000px;}
+    to {left:0px;}
+}
+.textbacking {
+    background-color: rgb(232, 134, 211);
+    padding: 10px;
+  }
+@keyframes fadein {
+    from {opacity:0%;}
+    to {opacity:100%}
+}
+@keyframes sway {
+    from {transform:rotate(-1deg);}
+    to {transform:rotate(1deg);}
 }

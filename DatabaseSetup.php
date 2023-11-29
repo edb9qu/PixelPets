@@ -27,12 +27,15 @@
     // Drop tables and sequences
     $res  = pg_query($dbHandle, "drop sequence if exists pet_seq;");
     $res  = pg_query($dbHandle, "drop sequence if exists user_seq;");
+    $res  = pg_query($dbHandle, "drop sequence if exists frequest_seq;");
     $res  = pg_query($dbHandle, "drop table if exists pets;");
     $res  = pg_query($dbHandle, "drop table if exists users;");
+    $res  = pg_query($dbHandle, "drop table if exists frequests;");
 
     // Create sequences
     $res  = pg_query($dbHandle, "create sequence pet_seq;");
     $res  = pg_query($dbHandle, "create sequence user_seq;");
+    $res  = pg_query($dbHandle, "create sequence frequest_seq;");
     
     // Create tablse
     $res  = pg_query($dbHandle, "create table pets (
@@ -45,7 +48,14 @@
             id  int primary key default nextval('user_seq'),
             email text,
             password text,
-            username text);");
+            username text,
+            friends text
+        );");
+    $res  = pg_query($dbHandle, "create table frequests (
+            id  int primary key default nextval('frequest_seq'),
+            requester text,
+            requestee text
+    );");
     echo "and Successfully reset Database";
 
     // Read json and insert the trivia questions into the database

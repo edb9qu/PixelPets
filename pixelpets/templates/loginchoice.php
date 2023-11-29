@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>    
-            <i>Remember to get a parent's permission to play PixelPet!</i>
+            <i>Remember to get a parent's permission to play PixelPets!</i>
 
         </div>
 

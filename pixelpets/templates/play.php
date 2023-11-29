@@ -30,7 +30,7 @@
 
             <?php
             $res = $this->db->query("select * from pets where owneremail = $1;", $_SESSION["email"]);
-
+            $delay = 0;
             foreach ($res as $key => $pet) {
                 ?>
 
@@ -39,7 +39,7 @@
                         <?php echo $pet["name"]; ?>
                     </h5>
                     <img src="..." class="card-img-top" alt="...">
-                    <div class="display-render" id="<?php echo $pet["name"]; ?>">
+                    <div class="display-render" style="<?php echo "animation-delay:",$delay, "ms"; $delay += 200;?>" id="<?php echo $pet["name"]; ?>">
                         
                     </div>
                     <script>

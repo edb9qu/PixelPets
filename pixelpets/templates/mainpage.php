@@ -16,8 +16,11 @@
         ?>
         
         <div class="m-5 container-f justify-content-center flex-column window">
-            <div class = "display d-flex"></div>
-                <header class="h1 text-center">PixelPets!</header>
+            <div class = "display d-flex justify-content-center ">
+                <img src=static/logo.png alt="PixelPets!" class="mx-auto align-self-center crisp"
+                height = "320"
+                width = "300">
+        </div></div>
                 <header class="h2 text-center">The Digital World of Furry Friends Made Just for You!</header>
                 <div class="text-center">
                   <form method ="post" action="?command=loginchoice">
@@ -30,9 +33,11 @@
                 <div class="col-sm-6">
                   <div class="card">
                     <div class="card-body">
-                      <h5 class="card-title">Check out what's NEW!</h5>
-                      <p class="card-text">There are so many new ways to customize your PixelPet, as well as the new "PixelFriends List"!</p>
-                      <a href="#" class="btn btn-primary">See New Features</a>
+                      <h5 class="card-title">Need Some Help?</h5>
+                      <p class="card-text">Never fear- team Pixel is here! We'll find a way to get you where you need to go and playing with your PixelPets in no time</p>
+                      <form action="?command=help" method="post">
+                        <button class="btn btn-primary"type="submit">Question Corner</button>
+                    </form>
                     </div>
                   </div>
                 </div>
@@ -40,8 +45,10 @@
                   <div class="card">
                     <div class="card-body">
                       <h5 class="card-title">Hey Parents!</h5>
-                      <p class="card-text">Come see the Friend-Features your child has accesss to, and what PixelPets is all about!</p>
-                      <a href="#" class="btn btn-primary">PixelParents Info</a>
+                      <p class="card-text">Come what PixelPets is all about and if it is right for your child! We're here to have fun, but most importantly, we're here to have SAFE fun!</p>
+                      <form action="?command=about" method="post">
+                        <button class="btn btn-primary"type="submit">Info on PixelPets</button>
+                    </form>
                     </div>
                   </div>
                 </div>

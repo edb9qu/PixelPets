@@ -38,6 +38,14 @@
             <div class="creation-render" id="<?php echo $pet["name"]; ?>">
 
             </div>
+            <div>
+                <form method="post" action=<?php echo "?command=release&"?>>
+                <button href="#" class="btn">Feed <?php echo $pet["name"]; ?>
+                </Button>
+                <button href="#" class="btn">Play with <?php echo $pet["name"]; ?>
+                </Button>
+            </form>
+            </div>
             <script>
                 var ajax = new XMLHttpRequest();
                 var comm = "?command=data&name=<?php echo $pet["name"];
@@ -55,10 +63,7 @@
                 });
 
             </script>
-            <p class="card-text">
-                <?php echo $pet["json"]; ?>
-            </p>
-
+            
             <?php
             if (isset($_SESSION["email"]) && $_SESSION["email"] == $email) {
                 ?>
@@ -68,7 +73,7 @@
                 echo "&name=";
                 echo urlencode($pet["name"]); ?>>
                     <button href="#" class="btn btn-danger">Free
-                        <?php echo urlencode($pet["name"]); ?>
+                        <?php echo $pet["name"]; ?>
                     </Button>
                     <input type="hidden" name="email" value=<?php echo $_SESSION["email"]; ?>>
 
@@ -77,7 +82,7 @@
                     <input type="hidden" name="command" value="data">
                     <input type="hidden" name="name" value=<?php echo urlencode($pet["name"]); ?>>
                     <button href="#" class="btn btn-danger">Get data for
-                        <?php echo urlencode($pet["name"]); ?>
+                        <?php echo $pet["name"]; ?>
                     </Button>
                     <input type="hidden" name="email" value=<?php echo $_SESSION["email"]; ?>>
 

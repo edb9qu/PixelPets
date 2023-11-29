@@ -27,6 +27,12 @@
                 case "play":
                     $this->showPlay();
                     break;
+                case "addfriend":
+                    $this->addFriend();
+                    break;
+                case "friends":
+                    $this->showFriends();
+                    break;
                 case "visit":
                     $this->showVisit();
                     break;
@@ -38,6 +44,12 @@
                     break;
                 case "petcreation":
                     $this->showPetCreation();
+                    break;
+                case "accept":
+                    $this->accept();
+                    break;
+                case "ignore":
+                    $this->ignore();
                     break;
                 case "create":
                     $this->create();
@@ -51,8 +63,15 @@
                 case "login":
                     $this->login();
                     break;
+                case "about":
+                    $this->showAbout();
+                    break;
+                case "help":
+                    $this->showHelp();
+                    break;
                 case "logout":
                     $this->logout();
+                
                 case "home":
                 default:
                     $this->showHome();
@@ -64,6 +83,11 @@
 
             include("templates/login.php");
         }
+        public function showFriends($errorMessage = "", $good = false) {
+            $email = $_SESSION["email"];
+            $username = $_SESSION["username"];
+            include("templates/friends.php");
+        }
         public function showVisit() {
             if (isset($this->input["email"]))
                 $email = $this->input["email"];
@@ -71,6 +95,98 @@
                 $id = $this->input["id"];
             
             include("templates/pet.php");
+        }
+        public function accept() {
+            // echo $_POST["acceptedusername"];
+            $res = $this->db->query("select * from users where username = $1", $_SESSION["username"]);
+            if(isset($res[0]["friends"])) {
+                // print_r($res[0]["friends"]);
+                $friends = json_decode($res[0]["friends"]);
+                array_push($friends, $_POST["acceptedusername"]);
+                // echo "HERE\n";
+                // print_r($friends);
+                $this->db->query("update users set friends = $1 where username = $2", json_encode($friends), $_SESSION["username"]);
+
+            }
+            else {
+                $friends = array($_POST["acceptedusername"]);
+                echo json_encode($friends);
+                $this->db->query("update users set friends = $1 where username = $2", json_encode($friends), $_SESSION["username"]);
+            }
+            $res = $this->db->query("select * from users where username = $1", $_POST["acceptedusername"]);
+            if(isset($res[0]["friends"])) {
+                print_r($res[0]["friends"]);
+                $friends = json_decode($res[0]["friends"]);
+                array_push($friends, $_SESSION["username"]);
+                echo "HERE\n";
+                print_r($friends);
+                $this->db->query("update users set friends = $1 where username = $2", json_encode($friends), $_POST["acceptedusername"]);
+
+            }
+            else {
+                $friends = array($_SESSION["username"]);
+                echo json_encode($friends);
+                $this->db->query("update users set friends = $1 where username = $2", json_encode($friends), $_POST["acceptedusername"]);
+            }
+            
+            // echo $res[0]["friends"]; 
+            $this->db->query("delete from frequests where requester = $1 and requestee = $2", $_POST["acceptedusername"], $_SESSION["username"]);
+            $this->showFriends("Successfully accepted " . $_POST["acceptedusername"]  . "!", true);
+        }
+        public function ignore() {
+            
+            // echo $_POST["ignoredusername"];
+            $this->db->query("delete from frequests where requester = $1 and requestee = $2", $_POST["ignoredusername"], $_SESSION["username"]);
+            $this->showFriends("Successfully ignored " . $_POST["ignoredusername"]  . "...");
+        }
+        public function addFriend() {
+            if($_POST["username"] == $_SESSION["username"]) {
+                $message = "You can't befriend yourself, silly.";
+                $this->showFriends($message);
+                return;
+            }
+
+            $res = $this->db->query("select * from users where username = $1;", $_POST["username"]);
+
+            if (!empty($res)) {
+                $res = $this->db->query("select * from users where username = $1", $_POST["username"]);
+
+                if(in_array($_SESSION["username"],json_decode($res[0]["friends"]))) {
+                    $this->showFriends("This user is already on your friends list!");
+                    return;
+                } 
+                $res = $this->db->query("select * from frequests where requester = $1 and requestee = $2;", $_SESSION["username"], $_POST["username"]);
+
+                if(!empty($res)) {
+                    $message= "You've already sent this user a friend request! Be patient!";
+                    $this->showFriends($message);
+                    return;
+                }
+                else {
+                    $res = $this->db->query("select * from frequests where requester = $1 and requestee = $2;", $_POST["username"],$_SESSION["username"]);
+                    if(!empty($res)) {
+                        $this->showFriends("This person has already requested to be friends with you. Accept their request!", true);
+                        return;
+                    }
+                    
+
+                    $this->db->query("insert into frequests (requester, requestee) values ($1, $2);",
+                    $_SESSION["username"],
+                    $_POST["username"],
+                    );
+                }
+                // echo "Friend request sent!";
+                $message =  "Friend request sent!";
+                $this->showFriends($message, true);
+                return;
+            }
+            else {
+                // echo "Ah! We had trouble finiding a user by that name. Are you sure you typed it right?";
+                $message= "Ah! We had trouble finiding a user by that name. Are you sure you typed it right?";
+                $this->showFriends($message);
+                return;
+            }
+                
         }
         public function getPetData() {
             $email = $_GET["email"];
@@ -125,12 +241,18 @@
                 $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
                 return;
             }
+            $res = $this->db->query("select * from users where username = $1;", $_POST["username"]);
+            if (!empty($res)) {
+                $message = "A user by this email already exists!";
+                $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
+                return;
+            }
             $res = $this->db->query("select * from users where email = $1;", $_POST["email"]);
             if (empty($res)) {
                 // User was not there, so insert them
-                $this->db->query("insert into users (username, email, password) values ($1, $2, $3);",
+                $this->db->query("insert into users (username, email, password, friends) values ($1, $2, $3, $4);",
                     $_POST["username"], $_POST["email"],
-                    password_hash($_POST["pass"], PASSWORD_DEFAULT));
+                    password_hash($_POST["pass"], PASSWORD_DEFAULT),json_encode([]));
                 
                 $_SESSION["email"] = $_POST["email"];
                 $_SESSION["username"] = $_POST["username"];
@@ -220,6 +342,12 @@
         }
         public function showPlay(){
             include("templates/play.php");
+        }
+        public function showAbout($errorMessage=""){
+            include("templates/about.php");
+        }
+        public function showHelp($errorMessage=""){
+            include("templates/help.php");
         }
         public function showLoginChoice() {
             
