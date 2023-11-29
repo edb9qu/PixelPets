@@ -35,7 +35,9 @@
             // }
             // // print_r($pets);
             // array_multisort($pets, SORT_DESC, $res);
-            uasort($res, function ($a, $b ) {return $b["pets_count"] - $a["pets_count"]; });
+            uasort($res, function ($a, $b) {
+                return $b["pets_count"] - $a["pets_count"];
+            });
             // print_r($res);
             foreach ($res as $key => $pet) {
                 ?>
@@ -44,14 +46,21 @@
                     <h5 class="card-title">
                         <?php echo $pet["name"]; ?>
                     </h5>
-                    <p>Owner: <?php echo $this->db->query("select * from users where email = $1;", $pet["owneremail"])[0]["username"];?> </p>
+                    <p>Owner:
+                        <?php
+                        $res = $this->db->query("select * from users where email = $1;", $pet["owneremail"]);
+                        if(!empty($res)){
+                            echo $res[0]["username"];
+                        }
+                        // echo $this->db->query("select * from users where email = $1;", $pet["owneremail"])[0]["username"];
+                        ?>
+                    </p>
                     <div>
                         <?php echo $pet["name"]; ?> has been pet
                         <p style="display:inline;" id="<?php echo $pet["id"] ?>count"></p> times
                     </div>
                     <div class="display-render" style="<?php echo "animation-delay:", $delay, "ms";
-                    $delay += 200; ?>"
-                        id="<?php echo $pet["id"]; ?>">
+                    $delay += 200; ?>" id="<?php echo $pet["id"]; ?>">
 
                     </div>
                     <script>
@@ -77,13 +86,13 @@
                     <!-- <p class="card-text">
                         <?php echo $pet["json"]; ?>
                     </p> -->
-                    <?php 
+                    <?php
                     $res = $this->db->query("select * from pets where owneremail = $1;", $pet["owneremail"]);
                     $arr = [];
-                    foreach($res as $p) {
+                    foreach ($res as $p) {
                         array_push($arr, $p["name"]);
                     }
-                    $id = array_search($pet["name"],$arr);
+                    $id = array_search($pet["name"], $arr);
                     ?>
                     <form method="post" action=<?php echo "?command=visit&";
                     echo "email=";
