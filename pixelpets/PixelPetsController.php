@@ -274,7 +274,7 @@
             }
             $res = $this->db->query("select * from users where username = $1;", $_POST["username"]);
             if (!empty($res)) {
-                $message = "A user by this email already exists!";
+                $message = "A user by this username already exists!";
                 $this->showSignup($message, $_POST["username"],$_POST["email"],$_POST["selection"]);
                 return;
             }
